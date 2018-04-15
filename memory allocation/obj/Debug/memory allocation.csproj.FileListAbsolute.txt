@@ -1,0 +1,6 @@
+C:\Users\Aladdin\Desktop\memory allocation simulator back_end\memory allocation\memory allocation\bin\Debug\memory allocation.exe.config
+C:\Users\Aladdin\Desktop\memory allocation simulator back_end\memory allocation\memory allocation\bin\Debug\memory allocation.exe
+C:\Users\Aladdin\Desktop\memory allocation simulator back_end\memory allocation\memory allocation\bin\Debug\memory allocation.pdb
+C:\Users\Aladdin\Desktop\memory allocation simulator back_end\memory allocation\memory allocation\obj\Debug\memory allocation.csprojResolveAssemblyReference.cache
+C:\Users\Aladdin\Desktop\memory allocation simulator back_end\memory allocation\memory allocation\obj\Debug\memory allocation.exe
+C:\Users\Aladdin\Desktop\memory allocation simulator back_end\memory allocation\memory allocation\obj\Debug\memory allocation.pdb
