@@ -12,13 +12,13 @@ namespace ConsoleApplication1
         static int nholes = 5;
         static int nprocesses = 5;
         static int hole_id = -1;
-        static string type;
-        static List<Entry> input_holes = new List<Entry>(nholes);
-        static List<int> input_processes = new List<int>(nprocesses);
-        static List<Entry> holes_info;
-        static List<Entry> allocated_info;
-        static List<Entry> waiting;
-        static List<Entry> output_with_holes;
+        static string type ="first_fit";
+        static List<Entry> holes_info = new List<Entry>(nholes);
+        //static List<int> input_processes = new List<int>(nprocesses);
+        //static List<Entry> holes_info;
+        static List<Entry> allocated_info = new List<Entry>(nprocesses);
+        static List<Entry> waiting = new List<Entry>(nprocesses);
+        static List<Entry> output_with_holes = new List<Entry>(nholes+nprocesses);
 
 
 
@@ -53,6 +53,7 @@ namespace ConsoleApplication1
 
         }
 
+        /*
         static void Allocate()
         {
             holes_info = new List<Entry>(input_holes);
@@ -99,7 +100,7 @@ namespace ConsoleApplication1
                 }
             }
             sort(ref allocated_info, "start");
-        }
+        }*/
 
         static void Allocate(ref List<Entry> input_processes)
         {
@@ -135,6 +136,40 @@ namespace ConsoleApplication1
                 }
             }
             sort(ref allocated_info, "start");
+        }
+
+        static void Allocate(Entry process)
+        {
+            if (type == "first_fit")
+                sort(ref holes_info, "start");
+
+            else if (type == "best_fit")
+                sort(ref holes_info, "size");
+
+            else return;
+
+            int n = holes_info.Count;
+            int i = 0;
+            for (i = 0; i < n; i++)
+            {
+                if (process.size < holes_info[i].size)
+                {
+                    allocated_info.Add(new Entry(process.id, holes_info[i].start,process.size));
+                    holes_info[i].start = allocated_info.Last().end + 1;
+                    holes_info[i].size -= allocated_info.Last().size;
+                    break;
+                }
+                else if (process.size == holes_info[i].size)
+                {
+                    allocated_info.Add(new Entry(process.id, holes_info[i].start,process.size));
+                    holes_info.RemoveAt(i);
+                    break;
+                }
+            }
+            if (i == n)
+                waiting.Add(new Entry(process.id, process.size));
+            else
+                sort(ref allocated_info, "start");
         }
 
         static void DeAllocate(int id)
@@ -210,44 +245,33 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
+
             type = "first_fit";
-            /*
-            input.Add(new Process(1, 5, 5, 4));
-            input.Add(new Process(2, 4, 6, 2));
-            input.Add(new Process(3, 3, 7, 1));
-            input.Add(new Process(4, 1, 9, 3));
-            input.Add(new Process(5, 2, 2, 5));
-            input.Add(new Process(6, 6, 3, 5));
-            */
+
+            holes_info.Add(new Entry(hole_id, 0, 100));     // hole_id   start   size
+            holes_info.Add(new Entry(hole_id, 200, 500));
+            holes_info.Add(new Entry(hole_id, 800, 200));
+            holes_info.Add(new Entry(hole_id, 1100, 300));
+            holes_info.Add(new Entry(hole_id, 1500, 600));
 
             /*
-            input.Add(new Process(1, 0, 4, 4));
-            input.Add(new Process(2, 2, 10, 2));
-            input.Add(new Process(3, 4, 2, 1));
-            input.Add(new Process(4, 6, 20, 3));
-            input.Add(new Process(5, 8, 2, 5));
-            */
-
-            input_holes.Add(new Entry(-1, 0, 100));
-            input_holes.Add(new Entry(-1, 200, 500));
-            input_holes.Add(new Entry(-1, 800, 200));
-            input_holes.Add(new Entry(-1, 1100, 300));
-            input_holes.Add(new Entry(-1, 1500, 600));
-
             input_processes.Add(212);
             input_processes.Add(417);
             input_processes.Add(112);
             input_processes.Add(426);
-
+             */
+            
+            /*
             Console.WriteLine("--------input processes--------");
             foreach (int i in input_processes)
             {
                 Console.WriteLine(i);
             }
+            */
 
             Console.WriteLine();
             Console.WriteLine("--------input holes--------");
-            foreach (Entry i in input_holes)
+            foreach (Entry i in holes_info)
             {
                 Console.Write(i.id);
                 Console.Write("  ");
@@ -258,7 +282,10 @@ namespace ConsoleApplication1
                 Console.WriteLine(i.end);
             }
 
-            Allocate();
+            Allocate(new Entry(1, 212));   // id  size
+            Allocate(new Entry(2, 417));
+            Allocate(new Entry(3, 112));
+            Allocate(new Entry(4, 426));
 
             Console.WriteLine();
             Console.WriteLine("--------allocated processes--------");
@@ -305,8 +332,9 @@ namespace ConsoleApplication1
             //DeAllocate(3);
             //DeAllocate(1);
             //DeAllocate(4);
-            //DeAllocate(2);
-
+            
+            
+            DeAllocate(2);       // id
             instert_holes();
 
             Console.WriteLine();
