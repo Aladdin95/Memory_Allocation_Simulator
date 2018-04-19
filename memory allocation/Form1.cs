@@ -24,10 +24,15 @@ namespace memory_allocation
         {
             if (n_holes.Text == "") return;
             n_holes_int = Int32.Parse(n_holes.Text);
+            //clear
             panel.Controls.Clear();
+            hole_adds.Clear();
+            hole_sizes.Clear();
+            button1.Visible = false;
+            //
             panel.RowCount = n_holes_int + 1;
-            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
             panel.Controls.Add(new Label() { Text = "hole size" }, 0, 0);
             panel.Controls.Add(new Label() { Text = "hole address" }, 1, 0);
@@ -39,6 +44,11 @@ namespace memory_allocation
                 panel.Controls.Add(hole_sizes[i-1], 0, i);
                 panel.Controls.Add(hole_adds[i - 1], 1, i);
             }
+
+            button1.Location = new Point(button1.Location.X, 
+                hole_adds.Last().Location.Y + 50 + panel.Location.Y
+                );
+            button1.Visible = true;
         }
     }
 }
