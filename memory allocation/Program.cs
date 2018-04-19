@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace memory_allocation
 {
@@ -247,8 +248,9 @@ namespace memory_allocation
         static void Main(string[] args)
         {
             //let form1 work
-            Form1 m1 = new Form1();
-            m1.ShowDialog();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
 
             /* -------------------------------- back end testing here ------------------------------------------*/
 
