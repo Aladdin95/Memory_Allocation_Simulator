@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication1
+namespace memory_allocation
 {
 
     class Program
@@ -243,114 +243,123 @@ namespace ConsoleApplication1
             }
         }
 
+
         static void Main(string[] args)
         {
+            //let form1 work
+            Form1 m1 = new Form1();
+            m1.ShowDialog();
 
-            type = "first_fit";
+            /* -------------------------------- back end testing here ------------------------------------------*/
 
-            holes_info.Add(new Entry(hole_id, 0, 100));     // hole_id   start   size
-            holes_info.Add(new Entry(hole_id, 200, 500));
-            holes_info.Add(new Entry(hole_id, 800, 200));
-            holes_info.Add(new Entry(hole_id, 1100, 300));
-            holes_info.Add(new Entry(hole_id, 1500, 600));
+    //        type = "first_fit";
 
-            /*
-            input_processes.Add(212);
-            input_processes.Add(417);
-            input_processes.Add(112);
-            input_processes.Add(426);
-             */
+    //        holes_info.Add(new Entry(hole_id, 0, 100));     // hole_id   start   size
+    //        holes_info.Add(new Entry(hole_id, 200, 500));
+    //        holes_info.Add(new Entry(hole_id, 800, 200));
+    //        holes_info.Add(new Entry(hole_id, 1100, 300));
+    //        holes_info.Add(new Entry(hole_id, 1500, 600));
+
+    //        /*
+    //        input_processes.Add(212);
+    //        input_processes.Add(417);
+    //        input_processes.Add(112);
+    //        input_processes.Add(426);
+    //         */
             
-            /*
-            Console.WriteLine("--------input processes--------");
-            foreach (int i in input_processes)
-            {
-                Console.WriteLine(i);
-            }
-            */
+    //        /*
+    //        Console.WriteLine("--------input processes--------");
+    //        foreach (int i in input_processes)
+    //        {
+    //            Console.WriteLine(i);
+    //        }
+    //        */
 
-            Console.WriteLine();
-            Console.WriteLine("--------input holes--------");
-            foreach (Entry i in holes_info)
-            {
-                Console.Write(i.id);
-                Console.Write("  ");
-                Console.Write(i.size);
-                Console.Write("  ");
-                Console.Write(i.start);
-                Console.Write("  ");
-                Console.WriteLine(i.end);
-            }
+    //        Console.WriteLine();
+    //        Console.WriteLine("--------input holes--------");
+    //        foreach (Entry i in holes_info)
+    //        {
+    //            Console.Write(i.id);
+    //            Console.Write("  ");
+    //            Console.Write(i.size);
+    //            Console.Write("  ");
+    //            Console.Write(i.start);
+    //            Console.Write("  ");
+    //            Console.WriteLine(i.end);
+    //        }
 
-            Allocate(new Entry(1, 212));   // id  size
-            Allocate(new Entry(2, 417));
-            Allocate(new Entry(3, 112));
-            Allocate(new Entry(4, 426));
+    //        Allocate(new Entry(1, 212));   // id  size
+    //        Allocate(new Entry(2, 417));
+    //        Allocate(new Entry(3, 112));
+    //        Allocate(new Entry(4, 426));
 
-            Console.WriteLine();
-            Console.WriteLine("--------allocated processes--------");
-            foreach (Entry i in allocated_info)
-            {
-                Console.Write(i.id);
-                Console.Write("  ");
-                Console.Write(i.size);
-                Console.Write("  ");
-                Console.Write(i.start);
-                Console.Write("  ");
-                Console.WriteLine(i.end);
-            }
+    //        Console.WriteLine();
+    //        Console.WriteLine("--------allocated processes--------");
+    //        foreach (Entry i in allocated_info)
+    //        {
+    //            Console.Write(i.id);
+    //            Console.Write("  ");
+    //            Console.Write(i.size);
+    //            Console.Write("  ");
+    //            Console.Write(i.start);
+    //            Console.Write("  ");
+    //            Console.WriteLine(i.end);
+    //        }
 
-            Console.WriteLine();
-            Console.WriteLine("--------holes--------");
-            foreach (Entry i in holes_info)
-            {
-                Console.Write(i.id);
-                Console.Write("  ");
-                Console.Write(i.size);
-                Console.Write("  ");
-                Console.Write(i.start);
-                Console.Write("  ");
-                Console.WriteLine(i.end);
-            }
+    //        Console.WriteLine();
+    //        Console.WriteLine("--------holes--------");
+    //        foreach (Entry i in holes_info)
+    //        {
+    //            Console.Write(i.id);
+    //            Console.Write("  ");
+    //            Console.Write(i.size);
+    //            Console.Write("  ");
+    //            Console.Write(i.start);
+    //            Console.Write("  ");
+    //            Console.WriteLine(i.end);
+    //        }
 
-            instert_holes();
+    //        instert_holes();
 
-            Console.WriteLine();
-            Console.WriteLine("--------output--------");
-            foreach (Entry i in output_with_holes)
-            {
-                Console.Write(i.id);
-                Console.Write("  ");
-                Console.Write(i.size);
-                Console.Write("  ");
-                Console.Write(i.start);
-                Console.Write("  ");
-                Console.WriteLine(i.end);
-            }
+    //        Console.WriteLine();
+    //        Console.WriteLine("--------output--------");
+    //        foreach (Entry i in output_with_holes)
+    //        {
+    //            Console.Write(i.id);
+    //            Console.Write("  ");
+    //            Console.Write(i.size);
+    //            Console.Write("  ");
+    //            Console.Write(i.start);
+    //            Console.Write("  ");
+    //            Console.WriteLine(i.end);
+    //        }
 
 
-            //DeAllocate(3);
-            //DeAllocate(1);
-            //DeAllocate(4);
+    //        //DeAllocate(3);
+    //        //DeAllocate(1);
+    //        //DeAllocate(4);
             
             
-            DeAllocate(2);       // id
-            instert_holes();
+    //        DeAllocate(2);       // id
+    //        instert_holes();
 
-            Console.WriteLine();
-            Console.WriteLine("--------output--------");
-            foreach (Entry i in output_with_holes)
-            {
-                Console.Write(i.id);
-                Console.Write("  ");
-                Console.Write(i.size);
-                Console.Write("  ");
-                Console.Write(i.start);
-                Console.Write("  ");
-                Console.WriteLine(i.end);
-            }
+    //        Console.WriteLine();
+    //        Console.WriteLine("--------output--------");
+    //        foreach (Entry i in output_with_holes)
+    //        {
+    //            Console.Write(i.id);
+    //            Console.Write("  ");
+    //            Console.Write(i.size);
+    //            Console.Write("  ");
+    //            Console.Write(i.start);
+    //            Console.Write("  ");
+    //            Console.WriteLine(i.end);
+    //        }
+            
+            /* ---------------------- End of backend testing --------------------------------------------------- */
         }
-    }
+
+    } //of program class
 
     public class Entry
     {
