@@ -15,6 +15,8 @@ namespace memory_allocation
         int n_holes_int;
         List<TextBox> hole_sizes = new List<TextBox>();
         List<TextBox> hole_adds = new List<TextBox>();
+        List<int> hole_sizes_int = new List<int>();
+        List<int> hole_adds_int = new List<int>();
         public Form1()
         {
             InitializeComponent();
@@ -49,6 +51,48 @@ namespace memory_allocation
                 hole_adds.Last().Location.Y + 50 + panel.Location.Y
                 );
             button1.Visible = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //clear
+            hole_sizes_int.Clear();
+            hole_adds_int.Clear();
+            //filling
+            try
+            {
+                fill_data();
+                //let form2 work
+                Form2 m2 = new Form2();
+                m2.ShowDialog();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+        }
+
+        private void fill_data()
+        {
+            //clear
+            hole_sizes_int.Clear();
+            hole_adds_int.Clear();
+            //filling
+            for (int i = 0; i < n_holes_int; ++i)
+            {
+                if (hole_sizes[i].Text == "")
+                {
+                    Exception er = new Exception("please fill all fields");
+                    throw (er);
+                }
+                if (hole_adds[i].Text == "")
+                {
+                    Exception er = new Exception("please fill all fields");
+                    throw (er);
+                }
+                hole_sizes_int.Add(Int32.Parse(hole_sizes[i].Text));
+                hole_adds_int.Add(Int32.Parse(hole_adds[i].Text));
+            }
         }
     }
 }

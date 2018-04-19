@@ -19,3 +19,4 @@ C:\Users\Abdullah\Documents\Visual Studio 2012\Projects\Memory_Allocation_Simula
 C:\Users\Abdullah\Documents\Visual Studio 2012\Projects\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Form1.resources
 C:\Users\Abdullah\Documents\Visual Studio 2012\Projects\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory allocation.csproj.GenerateResource.Cache
 C:\Users\Abdullah\Documents\Visual Studio 2012\Projects\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Properties.Resources.resources
+C:\Users\Abdullah\Documents\Visual Studio 2012\Projects\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Form2.resources
