@@ -89,7 +89,7 @@ namespace memory_allocation
                     Exception er = new Exception("please fill all fields");
                     throw (er);
                 }
-                Program.holes_info.Add(new Entry(i + 1,
+                Program.holes_info.Add(new Entry(-1,
                                             Int32.Parse(hole_adds[i].Text),
                                             Int32.Parse(hole_sizes[i].Text))
                                       );
