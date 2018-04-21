@@ -38,6 +38,10 @@ namespace memory_allocation
         {
             Program.instert_holes();
             generate_colors();
+            if(Program.max_size == 0){
+                MessageBox.Show("No thing to Draw!");
+                return;
+            }
             //do some thing
            // MessageBox.Show("I'm drawing "+ Program.output_with_holes.Count.ToString()+" items");
             //clear
@@ -49,12 +53,18 @@ namespace memory_allocation
             draw_area.RowCount = Program.output_with_holes.Count;
             draw_area.RowStyles.Clear();
             int id;
+            int height;
             for (int i = 0; i < Program.output_with_holes.Count; ++i)
             {
                 id = Program.output_with_holes[i].id;
-                draw_area.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+                height = Program.output_with_holes[i].size * 150 / Program.max_size;
+                draw_area.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
                 Label item = new Label();
-                item.Text = id.ToString();
+                item.Size = new Size(item.Size.Width, height);
+                //
+                item.Text = (id==-1)? "hole!": "Process"+id.ToString();
+                item.Text += "\nSize= " + Program.output_with_holes[i].size.ToString();
+                //
                 item.TextAlign = ContentAlignment.MiddleCenter;
                 item.BackColor = (id == -1) ? Color.White : colors[id - 1];
                 draw_area.Controls.Add(item, 0, i);

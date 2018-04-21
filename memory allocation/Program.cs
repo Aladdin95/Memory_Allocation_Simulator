@@ -13,12 +13,13 @@ namespace memory_allocation
         public static int nholes; // = 5;
         public static int nprocesses = 0; // = 5;
         public static int hole_id = -1;
+        public static int max_size = 0;
         public static string type; //="first_fit";
         public static List<Entry> holes_info = new List<Entry>();
 
         public static List<Entry> allocated_info = new List<Entry>(nprocesses);
         public static List<Entry> waiting = new List<Entry>(nprocesses);
-        public static List<Entry> output_with_holes = new List<Entry>(nholes + nprocesses);
+        public static List<Entry> output_with_holes;
 
 
 
@@ -226,11 +227,13 @@ namespace memory_allocation
             {
                 if (holes_index < holes_info.Count && holes_info[holes_index].start < allocated_info[allocated_index].start)
                 {
+                    if (holes_info[holes_index].size > max_size) max_size = holes_info[holes_index].size;
                     output_with_holes.Add(new Entry(holes_info[holes_index]));
                     holes_index++;
                 }
                 else
                 {
+                    if (allocated_info[allocated_index].size > max_size) max_size = allocated_info[allocated_index].size;
                     output_with_holes.Add(new Entry(allocated_info[allocated_index]));
                     allocated_index++;
                 }
@@ -238,6 +241,7 @@ namespace memory_allocation
 
             while (holes_index < holes_info.Count)
             {
+                if (holes_info[holes_index].size > max_size) max_size = holes_info[holes_index].size;
                 output_with_holes.Add(new Entry(holes_info[holes_index]));
                 holes_index++;
             }
