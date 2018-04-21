@@ -12,6 +12,7 @@ namespace memory_allocation
 {
     public partial class Form2 : Form
     {
+        List<Color> colors = new List<Color>();
         public Form2()
         {
             InitializeComponent();
@@ -36,8 +37,9 @@ namespace memory_allocation
         private void draw()
         {
             Program.instert_holes();
+            generate_colors();
             //do some thing
-            MessageBox.Show("I'm drawing "+ Program.output_with_holes.Count.ToString()+" items");
+           // MessageBox.Show("I'm drawing "+ Program.output_with_holes.Count.ToString()+" items");
             //clear
             draw_area.Controls.Clear();
             
@@ -46,14 +48,29 @@ namespace memory_allocation
 
             draw_area.RowCount = Program.output_with_holes.Count;
             draw_area.RowStyles.Clear();
-            //draw_area.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-          
+            int id;
             for (int i = 0; i < Program.output_with_holes.Count; ++i)
             {
-                draw_area.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+                id = Program.output_with_holes[i].id;
+                draw_area.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
                 Label item = new Label();
-                item.Text = Program.output_with_holes[i].id.ToString();
+                item.Text = id.ToString();
+                item.TextAlign = ContentAlignment.MiddleCenter;
+                item.BackColor = (id == -1) ? Color.White : colors[id - 1];
                 draw_area.Controls.Add(item, 0, i);
+            }
+        }
+
+        private void generate_colors()
+        {
+            int r, g, b;
+            Random m = new Random();
+            for (int i = colors.Count; i < Program.nprocesses; ++i)
+            {
+                r = m.Next(30, 255);
+                g = m.Next(30, 255);
+                b = m.Next(30, 255);
+                colors.Add(Color.FromArgb(r, g, b));
             }
         }
     }
