@@ -16,5 +16,22 @@ namespace memory_allocation
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (p_size.Text == "" || method.Text == "")
+            {
+                MessageBox.Show("Fill all possible data");
+                return;
+            }
+            int p_size_int = Int32.Parse(p_size.Text);
+            string t = (method.Text=="best fit")? "best_fit" : "first_fit";
+            //preparing input:
+            Program.type = t;
+            Program.nprocesses++;
+            //Entry entry = new Entry(Program.nprocesses,p_size_int);
+            Program.Allocate(new Entry(Program.nprocesses,p_size_int));
+            //draw();
+        }
     }
 }

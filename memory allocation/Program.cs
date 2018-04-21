@@ -8,18 +8,17 @@ using System.Windows.Forms;
 namespace memory_allocation
 {
 
-    class Program
+    public class Program
     {
-        static int nholes = 5;
-        static int nprocesses = 5;
-        static int hole_id = -1;
-        static string type ="first_fit";
-        static List<Entry> holes_info = new List<Entry>(nholes);
-        //static List<int> input_processes = new List<int>(nprocesses);
-        //static List<Entry> holes_info;
-        static List<Entry> allocated_info = new List<Entry>(nprocesses);
-        static List<Entry> waiting = new List<Entry>(nprocesses);
-        static List<Entry> output_with_holes = new List<Entry>(nholes+nprocesses);
+        public static int nholes; // = 5;
+        public static int nprocesses = 0; // = 5;
+        public static int hole_id = -1;
+        public static string type; //="first_fit";
+        public static List<Entry> holes_info = new List<Entry>();
+
+        public static List<Entry> allocated_info = new List<Entry>(nprocesses);
+        public static List<Entry> waiting = new List<Entry>(nprocesses);
+        public static List<Entry> output_with_holes = new List<Entry>(nholes + nprocesses);
 
 
 
@@ -103,7 +102,7 @@ namespace memory_allocation
             sort(ref allocated_info, "start");
         }*/
 
-        static void Allocate(ref List<Entry> input_processes)
+        public static void Allocate(ref List<Entry> input_processes)
         {
             if (type == "first_fit")
                 sort(ref holes_info, "start");
@@ -139,7 +138,7 @@ namespace memory_allocation
             sort(ref allocated_info, "start");
         }
 
-        static void Allocate(Entry process)
+        public static void Allocate(Entry process)
         {
             if (type == "first_fit")
                 sort(ref holes_info, "start");
@@ -173,7 +172,7 @@ namespace memory_allocation
                 sort(ref allocated_info, "start");
         }
 
-        static void DeAllocate(int id)
+        public static void DeAllocate(int id)
         {
             int allocated_info_index;
             int holes_info_index;
@@ -216,7 +215,7 @@ namespace memory_allocation
             Allocate(ref waiting);
         }
 
-        static void instert_holes()
+        public static void instert_holes()
         {
             int holes_index = 0, allocated_index = 0;
             output_with_holes = new List<Entry>(holes_info.Count + allocated_info.Count);
@@ -360,6 +359,7 @@ namespace memory_allocation
             
             /* ---------------------- End of backend testing --------------------------------------------------- */
         }
+
 
     } //of program class
 
