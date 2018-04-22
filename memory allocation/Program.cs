@@ -248,6 +248,23 @@ namespace memory_allocation
             }
         }
 
+        public static void merge_input_holes()
+        {
+            int index=0;
+            sort(ref holes_info, "start");
+            List<Entry> temp = new List<Entry>(holes_info);
+            for (int i = 0; i < temp.Count-1; ++i)
+            {
+                if (temp[i].end + 1 == temp[i + 1].start)
+                {
+                    holes_info[index].end = temp[i + 1].end;
+                    holes_info[index].size += temp[i + 1].size;
+                }
+                else 
+                    index++;
+            }
+            holes_info.RemoveRange(index + 1, holes_info.Count - index - 1);
+        }
 
         static void Main(string[] args)
         {
@@ -376,7 +393,7 @@ namespace memory_allocation
         public int end { get; set; }
 
         public Entry(int id, int start, int size)
-        { this.id = id; this.start = start; this.size = size; this.end = start + size; }
+        { this.id = id; this.start = start; this.size = size; this.end = start + size - 1; }
 
         public Entry(int id, int size)
         { this.id = id; this.size = size; }

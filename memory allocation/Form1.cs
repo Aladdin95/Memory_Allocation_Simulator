@@ -123,6 +123,7 @@ namespace memory_allocation
                                             Int32.Parse(hole_sizes[i].Text))
                                       );
             }
+            Program.merge_input_holes();
         }
     }
 }
