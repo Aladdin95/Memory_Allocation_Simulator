@@ -85,9 +85,10 @@
             // draw_area
             // 
             this.draw_area.AutoSize = true;
-            this.draw_area.ColumnCount = 2;
-            this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.84875F));
-            this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.15124F));
+            this.draw_area.ColumnCount = 3;
+            this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.85714F));
+            this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.14286F));
+            this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
             this.draw_area.Location = new System.Drawing.Point(112, 97);
             this.draw_area.Name = "draw_area";
             this.draw_area.RowCount = 1;

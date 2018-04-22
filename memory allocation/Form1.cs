@@ -91,6 +91,7 @@ namespace memory_allocation
             int test;
             for (int i = 0; i < Program.nholes ; ++i)
             {
+                
                 if (hole_sizes[i].Text == "")
                 {
                     Exception er = new Exception("please fill all fields");

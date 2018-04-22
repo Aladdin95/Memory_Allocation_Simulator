@@ -12,7 +12,10 @@ namespace memory_allocation
 {
     public partial class Form2 : Form
     {
+        
+        //
         List<Color> colors = new List<Color>();
+        List <Button> de_allocators = new List<Button>();
         public Form2()
         {
             InitializeComponent();
@@ -37,7 +40,6 @@ namespace memory_allocation
             //preparing input:
             Program.type = t;
             Program.nprocesses++;
-            //Entry entry = new Entry(id, size);
             Program.Allocate(new Entry(Program.nprocesses,p_size_int));
             draw();
         }
@@ -51,30 +53,57 @@ namespace memory_allocation
             }
             //do some thing
            // MessageBox.Show("I'm drawing "+ Program.output_with_holes.Count.ToString()+" items");
+            
             //clear
             draw_area.Controls.Clear();
+            de_allocators.Clear();
             
             //draw
             int min = 15, max = 200;
             draw_area.RowCount = Program.output_with_holes.Count;
             draw_area.RowStyles.Clear();
-            int id;
+            Entry p ;
             int height;
+            Color color;
             for (int i = 0; i < Program.output_with_holes.Count; ++i)
             {
-                id = Program.output_with_holes[i].id;
-                height = min + Program.output_with_holes[i].size * (max - min) / Program.max_size;
+                p = Program.output_with_holes[i];
+                height = min + p.size * (max - min) / Program.max_size;
+                color = (p.id == -1) ? Color.White : colors[p.id - 1];
                 draw_area.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
+
+                //addresses
+                draw_area.Controls.Add(new Label(){Text = "Address: "+p.start.ToString()}, 0, i);
+
+                //processes
                 Label item = new Label();
                 item.Size = new Size(item.Size.Width, height);
                 //
-                item.Text = (id==-1)? "hole!": "Process"+id.ToString();
-                item.Text += "\nSize= " + Program.output_with_holes[i].size.ToString();
+                item.Text = (p.id==-1)? "hole!": "Process"+p.id.ToString();
+                item.Text += "\nSize= " + p.size.ToString();
                 //
                 item.TextAlign = ContentAlignment.MiddleCenter;
-                item.BackColor = (id == -1) ? Color.White : colors[id - 1];
-                draw_area.Controls.Add(item, 0, i);
+                item.BackColor = color;
+                draw_area.Controls.Add(item, 1, i);
+
+                //de-allocate
+                if (p.id != -1)
+                {
+                    de_allocators.Add(new Button());
+                    de_allocators.Last().Text = "(X)";
+                    de_allocators.Last().Click += new EventHandler((sender,e)=>de_allocate(sender,e,p.id));
+                    draw_area.Controls.Add(de_allocators.Last(), 2, i);
+                }
+          
             }
+        }
+
+        private void de_allocate(object sender, EventArgs e, int id)
+        {
+            //problem : id is static, need to create much vars in memory
+            MessageBox.Show(id.ToString());
+            //Program.DeAllocate(id);
+            //draw();
         }
 
         private void generate_colors()
@@ -90,4 +119,5 @@ namespace memory_allocation
             }
         }
     }
+
 }
