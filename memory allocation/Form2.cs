@@ -63,7 +63,7 @@ namespace memory_allocation
             de_allocators.Clear();
             
             //draw
-            int min = 20, max = 200;
+            int min = 25, max = 250;
             draw_area.RowCount = Program.output_with_holes.Count;
             draw_area.RowStyles.Clear();
             Entry p ;

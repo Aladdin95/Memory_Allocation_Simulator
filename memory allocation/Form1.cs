@@ -123,7 +123,11 @@ namespace memory_allocation
                                             Int32.Parse(hole_sizes[i].Text))
                                       );
             }
-            Program.merge_input_holes();
+            if (!Program.merge_input_holes()) 
+            {
+                Exception er = new Exception("overlapping between holes are not allowed");
+                throw (er);
+            }
         }
     }
 }
