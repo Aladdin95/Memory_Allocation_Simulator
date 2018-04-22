@@ -20,3 +20,13 @@ C:\Users\Abdullah\Documents\Visual Studio 2012\Projects\Memory_Allocation_Simula
 C:\Users\Abdullah\Documents\Visual Studio 2012\Projects\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory allocation.csproj.GenerateResource.Cache
 C:\Users\Abdullah\Documents\Visual Studio 2012\Projects\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Properties.Resources.resources
 C:\Users\Abdullah\Documents\Visual Studio 2012\Projects\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Form2.resources
+C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\bin\Debug\memory allocation.exe.config
+C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory allocation.exe
+C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory allocation.pdb
+C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\bin\Debug\memory allocation.exe
+C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\bin\Debug\memory allocation.pdb
+C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory allocation.csprojResolveAssemblyReference.cache
+C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Form1.resources
+C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Form2.resources
+C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Properties.Resources.resources
+C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory allocation.csproj.GenerateResource.Cache

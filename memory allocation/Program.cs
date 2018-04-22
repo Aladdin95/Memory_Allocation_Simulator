@@ -187,23 +187,24 @@ namespace memory_allocation
             for (holes_info_index = 0; holes_info_index < holes_info.Count; holes_info_index++)
                 if (allocated_info[allocated_info_index].end < holes_info[holes_info_index].start) break;
 
-            if ((allocated_info[allocated_info_index].start == holes_info[holes_info_index - 1].end + 1) &&
+            if  (holes_info_index > 0 && holes_info_index < holes_info.Count && 
+                (allocated_info[allocated_info_index].start == holes_info[holes_info_index - 1].end + 1) &&
                 (allocated_info[allocated_info_index].end == holes_info[holes_info_index].start - 1))
             {
                 holes_info[holes_info_index - 1].size += allocated_info[allocated_info_index].size + holes_info[holes_info_index].size;
                 holes_info[holes_info_index - 1].end = holes_info[holes_info_index].end;
                 holes_info.RemoveAt(holes_info_index);
             }
-            else if (allocated_info[allocated_info_index].start == holes_info[holes_info_index - 1].end + 1)
-            {
-                holes_info[holes_info_index - 1].size += allocated_info[allocated_info_index].size;
-                holes_info[holes_info_index - 1].end = allocated_info[allocated_info_index].end;
-            }
-
-            else if (allocated_info[allocated_info_index].end == holes_info[holes_info_index].start - 1)
+            else if (holes_info_index < holes_info.Count && 
+                 allocated_info[allocated_info_index].end == holes_info[holes_info_index].start - 1)
             {
                 holes_info[holes_info_index].size += allocated_info[allocated_info_index].size;
                 holes_info[holes_info_index].start = allocated_info[allocated_info_index].start;
+            }
+            else if (holes_info_index > 0 && allocated_info[allocated_info_index].start == holes_info[holes_info_index - 1].end + 1)
+            {
+                holes_info[holes_info_index - 1].size += allocated_info[allocated_info_index].size;
+                holes_info[holes_info_index - 1].end = allocated_info[allocated_info_index].end;
             }
             else
             {

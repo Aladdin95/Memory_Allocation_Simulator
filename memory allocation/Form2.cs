@@ -114,7 +114,7 @@ namespace memory_allocation
             // end of soln 1
             MessageBox.Show(id2.ToString());
             //problem 2 in back end, uncomment next and discover:
-            //Program.DeAllocate(id2);
+            Program.DeAllocate(id2);
             draw();
         }
 
