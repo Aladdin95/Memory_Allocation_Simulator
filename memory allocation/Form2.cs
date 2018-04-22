@@ -18,6 +18,11 @@ namespace memory_allocation
         public Form2()
         {
             InitializeComponent();
+            //reset all values as holes info might change
+            Program.nprocesses = 0;
+            Program.output_with_holes.Clear();
+            Program.waiting.Clear();
+            Program.allocated_info.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -111,9 +116,9 @@ namespace memory_allocation
                     }
                 }
                 id2 = Int32.Parse(id2_s);
+                //MessageBox.Show(id2.ToString());
             // end of soln 1
-            MessageBox.Show(id2.ToString());
-            //problem 2 in back end, uncomment next and discover:
+
             Program.DeAllocate(id2);
             draw();
         }

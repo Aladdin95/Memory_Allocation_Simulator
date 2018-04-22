@@ -19,7 +19,7 @@ namespace memory_allocation
 
         public static List<Entry> allocated_info = new List<Entry>(nprocesses);
         public static List<Entry> waiting = new List<Entry>(nprocesses);
-        public static List<Entry> output_with_holes;
+        public static List<Entry> output_with_holes = new List<Entry>(nprocesses+holes_info.Count());
 
 
 
