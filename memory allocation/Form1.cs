@@ -125,7 +125,7 @@ namespace memory_allocation
             }
             if (!Program.merge_input_holes()) 
             {
-                Exception er = new Exception("overlapping between holes are not allowed");
+                Exception er = new Exception("overlapping between holes is not allowed");
                 throw (er);
             }
         }

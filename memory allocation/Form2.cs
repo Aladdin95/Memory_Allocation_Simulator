@@ -88,14 +88,22 @@ namespace memory_allocation
                 //
                 item.TextAlign = ContentAlignment.MiddleCenter;
                 item.BackColor = color;
+                if (p.id == -1)
+                {
+                    item.BorderStyle = BorderStyle.FixedSingle;
+                }
                 draw_area.Controls.Add(item, 1, i);
 
                 //de-allocate
                 if (p.id != -1)
                 {
                     de_allocators.Add(new Button());
-                    de_allocators.Last().Text = "(X) p"+p.id.ToString();
+                    string del1 = "✖";
+                    de_allocators.Last().Text = del1 + p.id.ToString();
                     de_allocators.Last().Click += new EventHandler((sender,e)=>de_allocate(sender,e,p.id));
+
+                    de_allocators.Last().Anchor = AnchorStyles.Top;
+                    de_allocators.Last().Anchor = AnchorStyles.Left;
                     draw_area.Controls.Add(de_allocators.Last(), 2, i);
                 }
           
