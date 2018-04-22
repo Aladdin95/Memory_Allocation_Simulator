@@ -250,18 +250,18 @@ namespace memory_allocation
 
         public static void merge_input_holes()
         {
-            int index=0;
+            int index = 0;
             sort(ref holes_info, "start");
             List<Entry> temp = new List<Entry>(holes_info);
-            for (int i = 0; i < temp.Count-1; ++i)
+            for (int i = 0; i < temp.Count - 1; ++i)
             {
                 if (temp[i].end + 1 == temp[i + 1].start)
                 {
                     holes_info[index].end = temp[i + 1].end;
                     holes_info[index].size += temp[i + 1].size;
                 }
-                else 
-                    index++;
+                else
+                    holes_info[++index] = temp[i + 1];
             }
             holes_info.RemoveRange(index + 1, holes_info.Count - index - 1);
         }
