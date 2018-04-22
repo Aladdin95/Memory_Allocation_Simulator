@@ -25,83 +25,45 @@ namespace memory_allocation
 
         static void sort(ref List<Entry> x, string s)
         {
-            int i;
-            int j;
+            bool swapped;
+
             if (s == "start")
-            {
-                for (i = 0; i < x.Count - 1; i++)
-                    for (j = i + 1; j < x.Count; j++)
-                        if (x[j].start < x[i].start)
+                do
+                {
+                    swapped = false;
+                    for (int i = 0; i < x.Count - 1; ++i) 
+                    {
+                        if (x[i].start > x[i + 1].start)
                         {
                             Entry temp = new Entry(x[i]);
-                            x[i] = x[j];
-                            x[j] = temp;
+                            x[i] = x[i + 1];
+                            x[i + 1] = temp;
+                            swapped = true;
                         }
-            }
+                    }
+                } while (swapped);
+
             else if (s == "size")
-                for (i = 0; i < x.Count - 1; i++)
-                    for (j = i + 1; j < x.Count; j++)
-                        if (x[j].size < x[i].size)
+                do
+                {
+                    swapped = false;
+                    for (int i = 0; i < x.Count - 1; ++i) 
+                    {
+                        if (x[i].size > x[i + 1].size)
                         {
                             Entry temp = new Entry(x[i]);
-                            x[i] = x[j];
-                            x[j] = temp;
+                            x[i] = x[i + 1];
+                            x[i + 1] = temp;
+                            swapped = true;
                         }
+                    }
+                } while (swapped);
         }
 
         static void Compact()
         {
 
         }
-
-        /*
-        static void Allocate()
-        {
-            holes_info = new List<Entry>(input_holes);
-            allocated_info = new List<Entry>(input_processes.Count);
-            waiting = new List<Entry>(input_processes.Count);
-            List<int> temp = new List<int>(input_processes);
-            temp.Reverse();
-
-            if (type == "first_fit")
-                sort(ref holes_info, "start");
-
-            else if (type == "best_fit")
-                sort(ref holes_info, "size");
-
-            else return;
-
-            while (temp.Count > 0)
-            {
-                int i = 0;
-                int n = holes_info.Count;
-                for (i = 0; i < n; i++)
-                {
-                    if (temp.Last() < holes_info[i].size)
-                    {
-                        allocated_info.Add(new Entry(input_processes.Count - temp.Count + 1, holes_info[i].start, temp.Last()));
-                        holes_info[i].start = allocated_info.Last().end + 1;
-                        holes_info[i].size -= allocated_info.Last().size;
-                        temp.RemoveAt(temp.Count - 1);
-                        break;
-                    }
-                    else if (temp.Last() == holes_info[i].size)
-                    {
-                        allocated_info.Add(new Entry(input_processes.Count - temp.Count + 1, holes_info[i].start, temp.Last()));
-                        holes_info.RemoveAt(i);
-                        temp.RemoveAt(temp.Count - 1);
-                        break;
-                    }
-                }
-
-                if (i == n)
-                {
-                    waiting.Add(new Entry(input_processes.Count - temp.Count + 1, temp.Last()));
-                    temp.RemoveAt(temp.Count - 1);
-                }
-            }
-            sort(ref allocated_info, "start");
-        }*/
 
         public static void Allocate(ref List<Entry> input_processes)
         {
