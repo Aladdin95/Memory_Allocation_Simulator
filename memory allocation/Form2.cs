@@ -13,7 +13,6 @@ namespace memory_allocation
     public partial class Form2 : Form
     {
         
-        //
         List<Color> colors = new List<Color>();
         List <Button> de_allocators = new List<Button>();
         public Form2()
@@ -59,7 +58,7 @@ namespace memory_allocation
             de_allocators.Clear();
             
             //draw
-            int min = 15, max = 200;
+            int min = 20, max = 200;
             draw_area.RowCount = Program.output_with_holes.Count;
             draw_area.RowStyles.Clear();
             Entry p ;
@@ -90,7 +89,7 @@ namespace memory_allocation
                 if (p.id != -1)
                 {
                     de_allocators.Add(new Button());
-                    de_allocators.Last().Text = "(X)";
+                    de_allocators.Last().Text = "(X) p"+p.id.ToString();
                     de_allocators.Last().Click += new EventHandler((sender,e)=>de_allocate(sender,e,p.id));
                     draw_area.Controls.Add(de_allocators.Last(), 2, i);
                 }
@@ -101,9 +100,22 @@ namespace memory_allocation
         private void de_allocate(object sender, EventArgs e, int id)
         {
             //problem : id is static, need to create much vars in memory
-            MessageBox.Show(id.ToString());
-            //Program.DeAllocate(id);
-            //draw();
+            //soln1, play on sender
+                string sender_info = sender.ToString();
+                int id2, test; string id2_s="";
+                for (int i = 0; i < sender_info.Count(); ++i)
+                {
+                    if(sender_info[i].ToString()!=" " && Int32.TryParse(sender_info[i].ToString(),out test))
+                    {
+                        id2_s += sender_info[i].ToString();
+                    }
+                }
+                id2 = Int32.Parse(id2_s);
+            // end of soln 1
+            MessageBox.Show(id2.ToString());
+            //problem 2 in back end, uncomment next and discover:
+            //Program.DeAllocate(id2);
+            draw();
         }
 
         private void generate_colors()
