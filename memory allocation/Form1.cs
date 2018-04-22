@@ -26,8 +26,19 @@ namespace memory_allocation
 
         private void n_holes_TextChanged(object sender, EventArgs e)
         {
-            if (n_holes.Text == "" || n_holes.Text == "0") return;
-            Program.nholes = Int32.Parse(n_holes.Text);
+            if (!Int32.TryParse(n_holes.Text, out Program.nholes) || Program.nholes < 1)
+            {
+                panel.Controls.Clear();
+                hole_adds.Clear();
+                hole_sizes.Clear();
+                button1.Visible = false;
+                if (n_holes.Text != "")
+                {
+                    MessageBox.Show("My dear, Enter a positive integer number");
+                    n_holes.Text = "";
+                }
+                return;
+            }
             //clear
             panel.Controls.Clear();
             hole_adds.Clear();
@@ -77,6 +88,7 @@ namespace memory_allocation
         private void fill_data()
         {
             //filling
+            int test;
             for (int i = 0; i < Program.nholes ; ++i)
             {
                 if (hole_sizes[i].Text == "")
@@ -84,11 +96,27 @@ namespace memory_allocation
                     Exception er = new Exception("please fill all fields");
                     throw (er);
                 }
+                if (! Int32.TryParse(hole_sizes[i].Text, out test))
+                {
+                    Exception er = new Exception("\"hole size\" must be a positive number");
+                    throw (er);
+                }
+                if (test <= 0)
+                {
+                    Exception er = new Exception("\"hole size\" must be a positive number");
+                    throw (er);
+                }
                 if (hole_adds[i].Text == "")
                 {
                     Exception er = new Exception("please fill all fields");
                     throw (er);
                 }
+                if (!Int32.TryParse(hole_adds[i].Text, out test))
+                {
+                    Exception er = new Exception("\"hole address\" must be zero or positive number");
+                    throw (er);
+                }
+                
                 Program.holes_info.Add(new Entry(-1,
                                             Int32.Parse(hole_adds[i].Text),
                                             Int32.Parse(hole_sizes[i].Text))

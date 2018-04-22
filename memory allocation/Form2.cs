@@ -20,13 +20,20 @@ namespace memory_allocation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (p_size.Text == "" || method.Text == "")
+            int p_size_int;
+            if (!Int32.TryParse(p_size.Text, out p_size_int) || p_size_int < 1)
             {
-                MessageBox.Show("Fill all possible data");
+                MessageBox.Show("Fill \"process size\" with a positive integar", "ERROR");
                 return;
             }
-            int p_size_int = Int32.Parse(p_size.Text); p_size.Text = "";
-            string t = (method.Text=="best fit")? "best_fit" : "first_fit";
+            string t;
+            if (method.Text == "best fit") t = "best_fit";
+            else
+            {
+                t = "first_fit";
+                method.Text = "first fit";
+            }
+            p_size.Text = "";
             //preparing input:
             Program.type = t;
             Program.nprocesses++;
@@ -48,8 +55,7 @@ namespace memory_allocation
             draw_area.Controls.Clear();
             
             //draw
-            int last_address = Program.output_with_holes.Last().end;
-
+            int min = 15, max = 200;
             draw_area.RowCount = Program.output_with_holes.Count;
             draw_area.RowStyles.Clear();
             int id;
@@ -57,7 +63,7 @@ namespace memory_allocation
             for (int i = 0; i < Program.output_with_holes.Count; ++i)
             {
                 id = Program.output_with_holes[i].id;
-                height = Program.output_with_holes[i].size * 150 / Program.max_size;
+                height = min + Program.output_with_holes[i].size * (max - min) / Program.max_size;
                 draw_area.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
                 Label item = new Label();
                 item.Size = new Size(item.Size.Width, height);
