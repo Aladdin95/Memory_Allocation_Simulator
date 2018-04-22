@@ -30,7 +30,7 @@ namespace memory_allocation
             int p_size_int;
             if (!Int32.TryParse(p_size.Text, out p_size_int) || p_size_int < 1)
             {
-                MessageBox.Show("Fill \"process size\" with a positive integar", "ERROR");
+                MessageBox.Show("Fill \"process size\" with a positive integer", "ERROR");
                 return;
             }
             string t;
@@ -129,9 +129,9 @@ namespace memory_allocation
             Random m = new Random();
             for (int i = colors.Count; i < Program.nprocesses; ++i)
             {
-                r = m.Next(30, 255);
-                g = m.Next(30, 255);
-                b = m.Next(30, 255);
+                r = m.Next(70, 250);
+                g = m.Next(70, 250);
+                b = m.Next(70, 250);
                 colors.Add(Color.FromArgb(r, g, b));
             }
         }
