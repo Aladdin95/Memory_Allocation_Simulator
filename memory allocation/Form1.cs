@@ -99,7 +99,7 @@ namespace memory_allocation
                 }
                 if (! Int32.TryParse(hole_sizes[i].Text, out test))
                 {
-                    Exception er = new Exception("\"hole size\" must be a positive number");
+                    Exception er = new Exception("\"hole size\" must be a positive integer number");
                     throw (er);
                 }
                 if (test <= 0)
