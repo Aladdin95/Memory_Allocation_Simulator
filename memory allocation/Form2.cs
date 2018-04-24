@@ -23,7 +23,6 @@ namespace memory_allocation
             Program.output_with_reserved.Clear();
             Program.waiting.Clear();
             Program.allocated_info.Clear();
-            Program.max_size = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -52,6 +51,7 @@ namespace memory_allocation
         {
             Program.instert_holes();
             Program.insert_reserved();
+            Program.setMaxSize();
             generate_colors();
             if(Program.max_size == 0){
                 MessageBox.Show("No thing to Draw!");
@@ -65,8 +65,8 @@ namespace memory_allocation
             de_allocators.Clear();
             
             //draw
-            int min = 25, max = 150;
-            int full = 625;
+            int min = 30, max = 150;
+            int full = 350;
             draw_area.RowCount = Program.output_with_reserved.Count;
             draw_area.RowStyles.Clear();
             draw_area.ColumnStyles.Clear();
@@ -75,9 +75,10 @@ namespace memory_allocation
             for (int i = 0; i < Program.output_with_reserved.Count; ++i)
             {
                 Entry p = Program.output_with_reserved[i];
-                height = min + p.size * (max - min) / Program.max_size;
-                //height = p.size / Program.memory_size * full;
-                color = (p.id == -1) ? Color.White : (p.id == Program.reserved_id) ? Color.Gray : colors[p.id - 1];
+                //height = min + p.size * (max - min) / Program.max_size;
+                height = min + (p.size * (full-min) / Program.memory_size);
+                color = (p.id == -1) ? Color.White : (p.id == Program.reserved_id) ? 
+                    Color.Gray : colors[p.id - 1];
                 draw_area.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
 
                 //addresses
@@ -107,16 +108,16 @@ namespace memory_allocation
                 draw_area.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200));
                 if (p.id != -1)
                 {
-                    de_allocators.Add(new Button() {Size = new Size(60,60),
+                    de_allocators.Add(new Button() {Size = new Size(60,40),
                         BackColor = Color.Salmon,
                     });
                     string del1 = "✖";
-                    de_allocators.Last().Text = del1 + p.id.ToString();
+                    de_allocators.Last().Text = (p.id == Program.reserved_id)? del1 : 
+                        del1 + p.id.ToString();
 
                     de_allocators.Last().Click += (sender, e) => { de_allocate(sender, e, p); };
 
-                    //de_allocators.Last().Anchor = AnchorStyles.Top;
-                    de_allocators.Last().Anchor = AnchorStyles.Left;
+                    de_allocators.Last().Anchor = (AnchorStyles.Top | AnchorStyles.Left);
                     draw_area.Controls.Add(de_allocators.Last(), 2, i);
                 }
           
@@ -127,6 +128,7 @@ namespace memory_allocation
         {
             if (entry.id == Program.reserved_id)
                 Program.reserved_DeAllocate(entry.start);
+                //very fucking smart
             else
                 Program.DeAllocate(entry.id);
             draw();

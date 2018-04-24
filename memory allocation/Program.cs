@@ -193,13 +193,13 @@ namespace memory_allocation
             {
                 if (holes_index < holes_info.Count && holes_info[holes_index].start < allocated_info[allocated_index].start)
                 {
-                    if (holes_info[holes_index].size > max_size) max_size = holes_info[holes_index].size;
+                    
                     output_with_holes.Add(new Entry(holes_info[holes_index]));
                     holes_index++;
                 }
                 else
                 {
-                    if (allocated_info[allocated_index].size > max_size) max_size = allocated_info[allocated_index].size;
+                    
                     output_with_holes.Add(new Entry(allocated_info[allocated_index]));
                     allocated_index++;
                 }
@@ -207,7 +207,7 @@ namespace memory_allocation
 
             while (holes_index < holes_info.Count)
             {
-                if (holes_info[holes_index].size > max_size) max_size = holes_info[holes_index].size;
+               
                 output_with_holes.Add(new Entry(holes_info[holes_index]));
                 holes_index++;
             }
@@ -270,6 +270,21 @@ namespace memory_allocation
             DeAllocate(-531);
         }
 
+        public static void setMaxSize()
+        {
+            //clear
+            max_size = 0;
+        /*-----------      doing 2 things        ---------
+             * maxSize of single record
+             * total size
+         */
+            for (int i = 0; i < output_with_reserved.Count(); i++)
+            {
+                if (output_with_reserved[i].size > max_size)
+                    max_size = output_with_reserved[i].size;
+            }
+
+        }
         static void Main(string[] args)
         {
             //let form1 work
