@@ -23,6 +23,7 @@ namespace memory_allocation
             Program.output_with_holes.Clear();
             Program.waiting.Clear();
             Program.allocated_info.Clear();
+            Program.max_size = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,9 +64,10 @@ namespace memory_allocation
             de_allocators.Clear();
             
             //draw
-            int min = 33, max = 300;
+            int min = 30, max = 300;
             draw_area.RowCount = Program.output_with_holes.Count;
             draw_area.RowStyles.Clear();
+            draw_area.ColumnStyles.Clear();
             Entry p ;
             int height;
             Color color;
@@ -77,13 +79,16 @@ namespace memory_allocation
                 draw_area.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
 
                 //addresses
+                draw_area.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200));
                 draw_area.Controls.Add(new Label(){Text = "Address: "+p.start.ToString()
-                , Size = new Size(120,height)
+                , Size = new Size(200,height),
+                TextAlign = ContentAlignment.TopRight,
                 }, 0, i);
 
                 //processes
+                draw_area.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200));
                 Label item = new Label();
-                item.Size = new Size(item.Size.Width+150, height);
+                item.Size = new Size(200, height);
                 //
                 item.Text = (p.id==-1)? "hole!": "P"+p.id.ToString()+",";
                 item.Text += " Size= " + p.size.ToString();
@@ -97,6 +102,7 @@ namespace memory_allocation
                 draw_area.Controls.Add(item, 1, i);
 
                 //de-allocate
+                draw_area.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200));
                 if (p.id != -1)
                 {
                     de_allocators.Add(new Button() {Size = new Size(60,60),
