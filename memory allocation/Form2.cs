@@ -23,6 +23,7 @@ namespace memory_allocation
             Program.output_with_reserved.Clear();
             Program.waiting.Clear();
             Program.allocated_info.Clear();
+            draw();
         }
 
         private void button1_Click(object sender, EventArgs e)
