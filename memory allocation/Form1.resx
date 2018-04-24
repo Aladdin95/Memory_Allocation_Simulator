@@ -122,11 +122,14 @@
     <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 12pt, style=Bold, Italic</value>
+  </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 70</value>
+    <value>83, 53</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+    <value>139, 20</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -146,11 +149,14 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="n_holes.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 12pt, style=Bold</value>
+  </data>
   <data name="n_holes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 63</value>
+    <value>268, 56</value>
   </data>
   <data name="n_holes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 20</value>
+    <value>152, 27</value>
   </data>
   <data name="n_holes.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -173,14 +179,17 @@
   <data name="panel.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="panel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 11.25pt, style=Bold, Italic</value>
+  </data>
   <data name="panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 146</value>
+    <value>115, 113</value>
   </data>
   <data name="panel.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 71</value>
+    <value>396, 33</value>
   </data>
   <data name="panel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -201,17 +210,20 @@
   <data name="panel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
+  <data name="button1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 12pt, style=Bold, Italic</value>
+  </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 278</value>
+    <value>189, 169</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 35</value>
+    <value>157, 48</value>
   </data>
   <data name="button1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="button1.Text" xml:space="preserve">
-    <value>Fill processes</value>
+    <value>fill processes</value>
   </data>
   <data name="button1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -238,10 +250,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>466, 375</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>536, 448</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

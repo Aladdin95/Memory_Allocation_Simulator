@@ -63,7 +63,7 @@ namespace memory_allocation
             de_allocators.Clear();
             
             //draw
-            int min = 25, max = 250;
+            int min = 33, max = 300;
             draw_area.RowCount = Program.output_with_holes.Count;
             draw_area.RowStyles.Clear();
             Entry p ;
@@ -77,7 +77,9 @@ namespace memory_allocation
                 draw_area.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
 
                 //addresses
-                draw_area.Controls.Add(new Label(){Text = "Address: "+p.start.ToString()}, 0, i);
+                draw_area.Controls.Add(new Label(){Text = "Address: "+p.start.ToString()
+                , Size = new Size(120,height)
+                }, 0, i);
 
                 //processes
                 Label item = new Label();
@@ -97,7 +99,9 @@ namespace memory_allocation
                 //de-allocate
                 if (p.id != -1)
                 {
-                    de_allocators.Add(new Button());
+                    de_allocators.Add(new Button() {Size = new Size(60,60),
+                        BackColor = Color.Salmon,
+                    });
                     string del1 = "✖";
                     de_allocators.Last().Text = del1 + p.id.ToString();
                     de_allocators.Last().Click += new EventHandler((sender,e)=>de_allocate(sender,e,p.id));
@@ -137,7 +141,7 @@ namespace memory_allocation
             Random m = new Random();
             for (int i = colors.Count; i < Program.nprocesses; ++i)
             {
-                r = m.Next(70, 250);
+                r = m.Next(70, 220);
                 g = m.Next(70, 250);
                 b = m.Next(70, 250);
                 colors.Add(Color.FromArgb(r, g, b));

@@ -38,6 +38,7 @@
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label1.Name = "label1";
             // 
             // n_holes
@@ -53,16 +54,18 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.DeepSkyBlue;
             resources.ApplyResources(this.button1, "button1");
+            this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.n_holes);

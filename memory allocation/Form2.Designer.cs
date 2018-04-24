@@ -39,26 +39,29 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 9);
+            this.label1.Location = new System.Drawing.Point(92, 13);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.Size = new System.Drawing.Size(109, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "process size";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(224, 8);
+            this.label2.Location = new System.Drawing.Point(411, 12);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.Size = new System.Drawing.Size(72, 19);
             this.label2.TabIndex = 1;
             this.label2.Text = "method";
             // 
             // p_size
             // 
-            this.p_size.Location = new System.Drawing.Point(53, 37);
+            this.p_size.Location = new System.Drawing.Point(97, 54);
+            this.p_size.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.p_size.Name = "p_size";
-            this.p_size.Size = new System.Drawing.Size(100, 20);
+            this.p_size.Size = new System.Drawing.Size(180, 27);
             this.p_size.TabIndex = 2;
             // 
             // method
@@ -67,19 +70,22 @@
             this.method.Items.AddRange(new object[] {
             "best fit",
             "first fit"});
-            this.method.Location = new System.Drawing.Point(227, 37);
+            this.method.Location = new System.Drawing.Point(416, 54);
+            this.method.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.method.Name = "method";
-            this.method.Size = new System.Drawing.Size(121, 21);
+            this.method.Size = new System.Drawing.Size(219, 27);
             this.method.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(405, 20);
+            this.button1.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.button1.Location = new System.Drawing.Point(743, 29);
+            this.button1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 37);
+            this.button1.Size = new System.Drawing.Size(167, 54);
             this.button1.TabIndex = 4;
             this.button1.Text = "Allocate";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // draw_area
@@ -88,26 +94,30 @@
             this.draw_area.ColumnCount = 3;
             this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.85714F));
             this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.14286F));
-            this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
-            this.draw_area.Location = new System.Drawing.Point(112, 97);
+            this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
+            this.draw_area.Location = new System.Drawing.Point(205, 142);
+            this.draw_area.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.draw_area.Name = "draw_area";
             this.draw_area.RowCount = 1;
             this.draw_area.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.draw_area.Size = new System.Drawing.Size(384, 177);
+            this.draw_area.Size = new System.Drawing.Size(704, 259);
             this.draw_area.TabIndex = 5;
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(618, 380);
+            this.BackColor = System.Drawing.Color.Lavender;
+            this.ClientSize = new System.Drawing.Size(995, 582);
             this.Controls.Add(this.draw_area);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.method);
             this.Controls.Add(this.p_size);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("Century Schoolbook", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.Name = "Form2";
             this.Text = "processes handler";
             this.ResumeLayout(false);

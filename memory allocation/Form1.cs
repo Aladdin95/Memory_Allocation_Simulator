@@ -49,8 +49,8 @@ namespace memory_allocation
             panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-            panel.Controls.Add(new Label() { Text = "hole size" }, 0, 0);
-            panel.Controls.Add(new Label() { Text = "hole address" }, 1, 0);
+            panel.Controls.Add(new Label() { Text = "hole size",Size=new Size(120,20) }, 0, 0);
+            panel.Controls.Add(new Label() { Text = "hole address", Size = new Size(120, 20) }, 1, 0);
             for (int i = 1; i <= Program.nholes; ++i)
             {
                 panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
