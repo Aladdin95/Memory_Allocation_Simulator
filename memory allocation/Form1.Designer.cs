@@ -56,7 +56,7 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.button1.BackColor = System.Drawing.Color.LightBlue;
             resources.ApplyResources(this.button1, "button1");
             this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Name = "button1";

@@ -133,7 +133,11 @@ namespace memory_allocation
                 }
             }
             if (i == n)
+            {
                 waiting.Add(new Entry(process.id, process.size));
+                MessageBox.Show("no free space to allocate process " + process.id +
+                    "\nit will be allocated whenever it's possible :)","Notice");
+            }
             else
                 sort(ref allocated_info, "start");
         }
