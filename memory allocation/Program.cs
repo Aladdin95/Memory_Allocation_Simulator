@@ -66,21 +66,22 @@ namespace memory_allocation
         static private void Compact()
         {
             int i = 0;
-            Entry hole = new Entry(-1,0);
+            Entry hole = new Entry(-1, 0);
+
             allocated_info.Clear();
             holes_info.Clear();
+            hole.end = memory_size - 1;
+
             while (i < output_with_reserved.Count)
             {
-
                 Entry p = output_with_reserved[i];
-                hole.end = memory_size - 1;
 
                 if (p.id == -1)
                 {
                     hole.size += p.size;
-                    output_with_reserved[i].end = p.start-1;
+                    output_with_reserved[i].end = p.start - 1;
                     i++;
-                    while (output_with_reserved[i].id != -1)
+                    while (i < output_with_reserved.Count && output_with_reserved[i].id != -1)
                     {
                         output_with_reserved[i].start = output_with_reserved[i - 1].end + 1;
                         output_with_reserved[i].end = output_with_reserved[i].start + output_with_reserved[i].size - 1;
@@ -89,9 +90,18 @@ namespace memory_allocation
                             allocated_info.Add(new Entry(output_with_reserved[i]));
                         i++;
                     }
+                    if (i < output_with_reserved.Count)
+                    {
+                        output_with_reserved[i].start = output_with_reserved[i - 1].end + 1;
+                        output_with_reserved[i].end = output_with_reserved[i].start + output_with_reserved[i].size - 1;
+                    }
                 }
-                else
+                else 
+                {
+                    if (p.id != 0)
+                        allocated_info.Add(new Entry(output_with_reserved[i]));
                     i++;
+                }
             }
             holes_info.Add(new Entry(hole));
             holes_info.Last().start = memory_size - hole.size;
@@ -357,6 +367,7 @@ namespace memory_allocation
                 {
                     //use
                     Compact();
+                    Allocate(p);
                     return true;
                 }
             }
