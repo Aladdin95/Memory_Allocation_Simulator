@@ -65,7 +65,37 @@ namespace memory_allocation
 
         static void Compact()
         {
+            int i = 0;
+            Entry hole = new Entry(-1,0);
 
+            while (i < output_with_reserved.Count)
+            {
+                allocated_info.Clear();
+                holes_info.Clear();
+
+                Entry p = output_with_reserved[i];
+                hole.end = memory_size - 1;
+
+                if (p.id == -1)
+                {
+                    hole.size += p.size;
+                    output_with_reserved[i].end = p.start-1;
+                    i++;
+                    while (output_with_reserved[i].id != -1)
+                    {
+                        output_with_reserved[i].start = output_with_reserved[i - 1].end + 1;
+                        output_with_reserved[i].end = output_with_reserved[i].start + output_with_reserved[i].size - 1;
+
+                        if (output_with_reserved[i].id != 0)
+                            allocated_info.Add(new Entry(output_with_reserved[i]));
+                        i++;
+                    }
+                }
+                else
+                    i++;
+            }
+            holes_info.Add(new Entry(hole));
+            holes_info.Last().start = memory_size - hole.size;
         }
 
         public static void Allocate(ref List<Entry> input_processes)
