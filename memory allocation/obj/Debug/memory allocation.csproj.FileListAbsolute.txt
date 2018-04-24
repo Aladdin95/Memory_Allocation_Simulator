@@ -30,3 +30,7 @@ C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation
 C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Form2.resources
 C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Properties.Resources.resources
 C:\Users\Aladdin\Desktop\os github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory allocation.csproj.GenerateResource.Cache
+C:\Users\Aladdin\Desktop\memory allocation github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Form1.resources
+C:\Users\Aladdin\Desktop\memory allocation github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Form2.resources
+C:\Users\Aladdin\Desktop\memory allocation github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory_allocation.Properties.Resources.resources
+C:\Users\Aladdin\Desktop\memory allocation github\Memory_Allocation_Simulator\memory allocation\obj\Debug\memory allocation.csproj.GenerateResource.Cache

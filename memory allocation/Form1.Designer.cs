@@ -33,6 +33,8 @@
             this.n_holes = new System.Windows.Forms.TextBox();
             this.panel = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
+            this.m_size = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -61,11 +63,24 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // m_size
+            // 
+            resources.ApplyResources(this.m_size, "m_size");
+            this.m_size.Name = "m_size";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Name = "label2";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
+            this.Controls.Add(this.m_size);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.n_holes);
@@ -82,5 +97,7 @@
         private System.Windows.Forms.TextBox n_holes;
         private System.Windows.Forms.TableLayoutPanel panel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox m_size;
+        private System.Windows.Forms.Label label2;
     }
 }

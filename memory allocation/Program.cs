@@ -13,13 +13,16 @@ namespace memory_allocation
         public static int nholes; // = 5;
         public static int nprocesses = 0; // = 5;
         public static int hole_id = -1;
+        public static int reserved_id = 0;
         public static int max_size = 0;
         public static string type; //="first_fit";
+        public static int memory_size;
         public static List<Entry> holes_info = new List<Entry>();
 
         public static List<Entry> allocated_info = new List<Entry>(nprocesses);
         public static List<Entry> waiting = new List<Entry>(nprocesses);
         public static List<Entry> output_with_holes = new List<Entry>(nprocesses+holes_info.Count());
+        public static List<Entry> output_with_reserved=new List<Entry>();
 
 
 
@@ -228,6 +231,43 @@ namespace memory_allocation
             }
             holes_info.RemoveRange(index + 1, holes_info.Count - index - 1);
             return true;
+        }
+
+        public static void insert_reserved()
+        {
+            int n = output_with_holes.Count;
+            if (output_with_holes[0].start > 0) ++n;
+            if (output_with_holes.Last().end < memory_size-1) ++n;
+            for (int i = 1; i < output_with_holes.Count; ++i)
+                if (output_with_holes[i].start > output_with_holes[i-1].end+1) ++n;
+
+            output_with_reserved = new List<Entry>(n);
+
+            if (output_with_holes[0].start > 0)
+                output_with_reserved.Add(new Entry(reserved_id, 0, output_with_holes[0].start));
+
+            output_with_reserved.Add(output_with_holes[0]);
+
+            for (int i = 1; i < output_with_holes.Count; ++i)
+            {
+                if ((output_with_holes[i].start > output_with_holes[i-1].end+1))
+                    output_with_reserved.Add(new Entry(reserved_id, output_with_holes[i - 1].end + 1, output_with_holes[i].start - output_with_holes[i - 1].end - 1));
+                output_with_reserved.Add(output_with_holes[i]);
+            }
+            if (output_with_holes.Last().end < memory_size-1)
+                output_with_reserved.Add(new Entry(reserved_id, output_with_holes.Last().end + 1, memory_size - output_with_holes.Last().end - 1));
+        }
+
+        public static void reserved_DeAllocate(int start)
+        {
+            int reserved_index;
+
+            for (reserved_index = 0; reserved_index < output_with_reserved.Count; reserved_index++)
+                if (output_with_reserved[reserved_index].start == start) break;
+            if (reserved_index == output_with_reserved.Count) return;
+
+            allocated_info.Add(new Entry(-531, start, output_with_reserved[reserved_index].size));  //-531 magic value :"D 
+            DeAllocate(-531);
         }
 
         static void Main(string[] args)

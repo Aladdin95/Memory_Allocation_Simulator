@@ -128,6 +128,16 @@ namespace memory_allocation
                 Exception er = new Exception("overlapping between holes is not allowed");
                 throw (er);
             }
+            if (!Int32.TryParse(m_size.Text, out Program.memory_size) || Program.memory_size < 1)
+            {
+                Exception er = new Exception("Enter a positive integer number in the memory size slot");
+                throw (er);
+            }
+            if (Program.holes_info.Last().end > Program.memory_size-1)
+            {
+                Exception er = new Exception("memory size should be greater than or equal the end of last hole");
+                throw (er);
+            }
         }
     }
 }

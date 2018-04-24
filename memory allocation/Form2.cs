@@ -12,7 +12,6 @@ namespace memory_allocation
 {
     public partial class Form2 : Form
     {
-        
         List<Color> colors = new List<Color>();
         List <Button> de_allocators = new List<Button>();
         public Form2()
@@ -21,6 +20,7 @@ namespace memory_allocation
             //reset all values as holes info might change
             Program.nprocesses = 0;
             Program.output_with_holes.Clear();
+            Program.output_with_reserved.Clear();
             Program.waiting.Clear();
             Program.allocated_info.Clear();
             Program.max_size = 0;
@@ -51,31 +51,33 @@ namespace memory_allocation
         private void draw()
         {
             Program.instert_holes();
+            Program.insert_reserved();
             generate_colors();
             if(Program.max_size == 0){
                 MessageBox.Show("No thing to Draw!");
                 return;
             }
             //do some thing
-           // MessageBox.Show("I'm drawing "+ Program.output_with_holes.Count.ToString()+" items");
+           // MessageBox.Show("I'm drawing "+ Program.output_with_reserved.Count.ToString()+" items");
             
             //clear
             draw_area.Controls.Clear();
             de_allocators.Clear();
             
             //draw
-            int min = 30, max = 300;
-            draw_area.RowCount = Program.output_with_holes.Count;
+            int min = 25, max = 150;
+            int full = 625;
+            draw_area.RowCount = Program.output_with_reserved.Count;
             draw_area.RowStyles.Clear();
             draw_area.ColumnStyles.Clear();
-            Entry p ;
             int height;
             Color color;
-            for (int i = 0; i < Program.output_with_holes.Count; ++i)
+            for (int i = 0; i < Program.output_with_reserved.Count; ++i)
             {
-                p = Program.output_with_holes[i];
+                Entry p = Program.output_with_reserved[i];
                 height = min + p.size * (max - min) / Program.max_size;
-                color = (p.id == -1) ? Color.White : colors[p.id - 1];
+                //height = p.size / Program.memory_size * full;
+                color = (p.id == -1) ? Color.White : (p.id == Program.reserved_id) ? Color.Gray : colors[p.id - 1];
                 draw_area.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
 
                 //addresses
@@ -90,12 +92,12 @@ namespace memory_allocation
                 Label item = new Label();
                 item.Size = new Size(200, height);
                 //
-                item.Text = (p.id==-1)? "hole!": "P"+p.id.ToString()+",";
+                item.Text = (p.id==-1)? "hole!,": (p.id == Program.reserved_id) ? "Reserved,": "P"+p.id.ToString()+",";
                 item.Text += " Size= " + p.size.ToString();
                 //
                 item.TextAlign = ContentAlignment.MiddleCenter;
                 item.BackColor = color;
-                if (p.id == -1)
+                if (p.id == -1 || p.id == Program.reserved_id)
                 {
                     item.BorderStyle = BorderStyle.FixedSingle;
                 }
@@ -110,7 +112,8 @@ namespace memory_allocation
                     });
                     string del1 = "✖";
                     de_allocators.Last().Text = del1 + p.id.ToString();
-                    de_allocators.Last().Click += new EventHandler((sender,e)=>de_allocate(sender,e,p.id));
+
+                    de_allocators.Last().Click += (sender, e) => { de_allocate(sender, e, p); };
 
                     //de_allocators.Last().Anchor = AnchorStyles.Top;
                     de_allocators.Last().Anchor = AnchorStyles.Left;
@@ -120,24 +123,12 @@ namespace memory_allocation
             }
         }
 
-        private void de_allocate(object sender, EventArgs e, int id)
+        private void de_allocate(object sender, EventArgs e, Entry entry)
         {
-            //problem : id is static, need to create much vars in memory
-            //soln1, play on sender
-                string sender_info = sender.ToString();
-                int id2, test; string id2_s="";
-                for (int i = 0; i < sender_info.Count(); ++i)
-                {
-                    if(sender_info[i].ToString()!=" " && Int32.TryParse(sender_info[i].ToString(),out test))
-                    {
-                        id2_s += sender_info[i].ToString();
-                    }
-                }
-                id2 = Int32.Parse(id2_s);
-                //MessageBox.Show(id2.ToString());
-            // end of soln 1
-
-            Program.DeAllocate(id2);
+            if (entry.id == Program.reserved_id)
+                Program.reserved_DeAllocate(entry.start);
+            else
+                Program.DeAllocate(entry.id);
             draw();
         }
 
