@@ -83,10 +83,10 @@ namespace memory_allocation
 
                 //processes
                 Label item = new Label();
-                item.Size = new Size(item.Size.Width, height);
+                item.Size = new Size(item.Size.Width+150, height);
                 //
-                item.Text = (p.id==-1)? "hole!": "Process"+p.id.ToString();
-                item.Text += "\nSize= " + p.size.ToString();
+                item.Text = (p.id==-1)? "hole!": "P"+p.id.ToString()+",";
+                item.Text += " Size= " + p.size.ToString();
                 //
                 item.TextAlign = ContentAlignment.MiddleCenter;
                 item.BackColor = color;
@@ -106,7 +106,7 @@ namespace memory_allocation
                     de_allocators.Last().Text = del1 + p.id.ToString();
                     de_allocators.Last().Click += new EventHandler((sender,e)=>de_allocate(sender,e,p.id));
 
-                    de_allocators.Last().Anchor = AnchorStyles.Top;
+                    //de_allocators.Last().Anchor = AnchorStyles.Top;
                     de_allocators.Last().Anchor = AnchorStyles.Left;
                     draw_area.Controls.Add(de_allocators.Last(), 2, i);
                 }
