@@ -35,6 +35,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.draw_area = new System.Windows.Forms.TableLayoutPanel();
             this.wait_panel = new System.Windows.Forms.TableLayoutPanel();
+            this.memory = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -97,8 +98,8 @@
             this.draw_area.ColumnCount = 3;
             this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.85714F));
             this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.14286F));
-            this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 263F));
-            this.draw_area.Location = new System.Drawing.Point(205, 142);
+            this.draw_area.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 264F));
+            this.draw_area.Location = new System.Drawing.Point(203, 174);
             this.draw_area.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.draw_area.Name = "draw_area";
             this.draw_area.RowCount = 1;
@@ -111,12 +112,21 @@
             this.wait_panel.AutoSize = true;
             this.wait_panel.ColumnCount = 1;
             this.wait_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.wait_panel.Location = new System.Drawing.Point(781, 142);
+            this.wait_panel.Location = new System.Drawing.Point(783, 154);
             this.wait_panel.Name = "wait_panel";
             this.wait_panel.RowCount = 1;
             this.wait_panel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.wait_panel.Size = new System.Drawing.Size(200, 100);
             this.wait_panel.TabIndex = 6;
+            // 
+            // memory
+            // 
+            this.memory.AutoSize = true;
+            this.memory.Location = new System.Drawing.Point(406, 142);
+            this.memory.Name = "memory";
+            this.memory.Size = new System.Drawing.Size(77, 19);
+            this.memory.TabIndex = 7;
+            this.memory.Text = "Memory";
             // 
             // Form2
             // 
@@ -125,6 +135,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(995, 582);
+            this.Controls.Add(this.memory);
             this.Controls.Add(this.wait_panel);
             this.Controls.Add(this.draw_area);
             this.Controls.Add(this.button1);
@@ -150,5 +161,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel draw_area;
         private System.Windows.Forms.TableLayoutPanel wait_panel;
+        private System.Windows.Forms.Label memory;
     }
 }

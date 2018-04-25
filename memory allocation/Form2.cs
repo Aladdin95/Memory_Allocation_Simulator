@@ -130,7 +130,7 @@ namespace memory_allocation
             {
                 //waiting:
                 int min2 = 30;
-                int full2 = 250;
+                int full2 = 100;
                 int height2;
                 wait_panel.RowCount = Program.waiting.Count;
                 wait_panel.RowStyles.Clear();
@@ -143,9 +143,10 @@ namespace memory_allocation
                     Entry p = Program.waiting[i];
                     height2 = min2+ (p.size * (full2-min2)/Program.waiting_size());
                     wait_panel.RowStyles.Add(new RowStyle(SizeType.Absolute, height2));
-                    wait_panel.Controls.Add(new Label() { Text = "p"+p.id+", Size= "+p.size,
+                    wait_panel.Controls.Add(new Label() { Text = "P"+p.id+", Size= "+p.size,
                     BackColor = colors[p.id-1],
                     Size =new Size(200,height2),
+                    TextAlign = ContentAlignment.MiddleCenter,
                     });
                 }
             }
