@@ -64,8 +64,9 @@ namespace memory_allocation
             
             //clear
             draw_area.Controls.Clear();
+            wait_panel.Controls.Clear();
             de_allocators.Clear();
-            
+
             //draw
             int min = 30, max = 150;
             int full = 350;
@@ -107,7 +108,7 @@ namespace memory_allocation
                 draw_area.Controls.Add(item, 1, i);
 
                 //de-allocate
-                draw_area.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200));
+                draw_area.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 70));
                 if (p.id != -1)
                 {
                     de_allocators.Add(new Button() {Size = new Size(60,40),
@@ -122,7 +123,31 @@ namespace memory_allocation
                     de_allocators.Last().Anchor = (AnchorStyles.Top | AnchorStyles.Left);
                     draw_area.Controls.Add(de_allocators.Last(), 2, i);
                 }
-          
+                
+            }
+
+            if(Program.waiting.Count!=0)
+            {
+                //waiting:
+                int min2 = 30;
+                int full2 = 250;
+                int height2;
+                wait_panel.RowCount = Program.waiting.Count;
+                wait_panel.RowStyles.Clear();
+                wait_panel.ColumnStyles.Clear();
+                wait_panel.RowStyles.Add(new RowStyle(SizeType.Absolute, min2));
+                wait_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200));
+                wait_panel.Controls.Add(new Label() { Text = "Waiting processes:" });
+                for (int i = 0; i < Program.waiting.Count; ++i)
+                {
+                    Entry p = Program.waiting[i];
+                    height2 = min2+ (p.size * (full2-min2)/Program.waiting_size());
+                    wait_panel.RowStyles.Add(new RowStyle(SizeType.Absolute, height2));
+                    wait_panel.Controls.Add(new Label() { Text = "p"+p.id+", Size= "+p.size,
+                    BackColor = colors[p.id-1],
+                    Size =new Size(200,height2),
+                    });
+                }
             }
         }
 

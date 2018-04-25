@@ -24,7 +24,14 @@ namespace memory_allocation
         public static List<Entry> output_with_holes = new List<Entry>(nprocesses+holes_info.Count());
         public static List<Entry> output_with_reserved=new List<Entry>();
 
-
+        public static int waiting_size(){
+            int waiting_size = 0;
+            for (int i = 0; i < waiting.Count; ++i)
+            {
+                waiting_size += waiting[i].size;
+            }
+            return waiting_size;
+        }
 
         static void sort(ref List<Entry> x, string s)
         {
