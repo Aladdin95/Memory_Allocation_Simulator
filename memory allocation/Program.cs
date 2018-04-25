@@ -68,6 +68,8 @@ namespace memory_allocation
             int i = 0;
             Entry hole = new Entry(-1, 0);
 
+            instert_holes();
+            insert_reserved();
             allocated_info.Clear();
             holes_info.Clear();
             hole.end = memory_size - 1;
@@ -135,6 +137,12 @@ namespace memory_allocation
                     {
                         allocated_info.Add(new Entry(input_processes[j].id, holes_info[i].start, input_processes[j].size));
                         holes_info.RemoveAt(i);
+                        input_processes.RemoveAt(j);
+                        break;
+                    }
+                    else if (canCompact(input_processes[j].size))
+                    {
+                        handle_compaction(input_processes[j]);
                         input_processes.RemoveAt(j);
                         break;
                     }
@@ -328,6 +336,7 @@ namespace memory_allocation
             }
 
         }
+   
         private static bool canCompact(int size)
         {
             int available = 0;
@@ -338,6 +347,7 @@ namespace memory_allocation
             }
             return false;
         }
+     
         private static bool handle_compaction(Entry p)
         { //hint, I don't push any thing to the waiting list
             bool canCompact = Program.canCompact(p.size);
