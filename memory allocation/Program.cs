@@ -70,25 +70,27 @@ namespace memory_allocation
                 } while (swapped);
         }
 
-        static void Compact()
+        static private void Compact()
         {
             int i = 0;
-            Entry hole = new Entry(-1,0);
+            Entry hole = new Entry(-1, 0);
+
+            instert_holes();
+            insert_reserved();
+            allocated_info.Clear();
+            holes_info.Clear();
+            hole.end = memory_size - 1;
 
             while (i < output_with_reserved.Count)
             {
-                allocated_info.Clear();
-                holes_info.Clear();
-
                 Entry p = output_with_reserved[i];
-                hole.end = memory_size - 1;
 
                 if (p.id == -1)
                 {
                     hole.size += p.size;
-                    output_with_reserved[i].end = p.start-1;
+                    output_with_reserved[i].end = p.start - 1;
                     i++;
-                    while (output_with_reserved[i].id != -1)
+                    while (i < output_with_reserved.Count && output_with_reserved[i].id != -1)
                     {
                         output_with_reserved[i].start = output_with_reserved[i - 1].end + 1;
                         output_with_reserved[i].end = output_with_reserved[i].start + output_with_reserved[i].size - 1;
@@ -97,9 +99,18 @@ namespace memory_allocation
                             allocated_info.Add(new Entry(output_with_reserved[i]));
                         i++;
                     }
+                    if (i < output_with_reserved.Count)
+                    {
+                        output_with_reserved[i].start = output_with_reserved[i - 1].end + 1;
+                        output_with_reserved[i].end = output_with_reserved[i].start + output_with_reserved[i].size - 1;
+                    }
                 }
-                else
+                else 
+                {
+                    if (p.id != 0)
+                        allocated_info.Add(new Entry(output_with_reserved[i]));
                     i++;
+                }
             }
             holes_info.Add(new Entry(hole));
             holes_info.Last().start = memory_size - hole.size;
@@ -133,6 +144,12 @@ namespace memory_allocation
                     {
                         allocated_info.Add(new Entry(input_processes[j].id, holes_info[i].start, input_processes[j].size));
                         holes_info.RemoveAt(i);
+                        input_processes.RemoveAt(j);
+                        break;
+                    }
+                    else if (canCompact(input_processes[j].size))
+                    {
+                        handle_compaction(input_processes[j]);
                         input_processes.RemoveAt(j);
                         break;
                     }
@@ -171,9 +188,9 @@ namespace memory_allocation
             }
             if (i == n)
             {
-                waiting.Add(new Entry(process.id, process.size));
-                MessageBox.Show("no free space to allocate process " + process.id +
-                    "\nit will be allocated whenever it's possible :)","Notice");
+                bool compacted = handle_compaction(process);
+                if(!compacted)
+                    waiting.Add(new Entry(process.id, process.size));
             }
             else
                 sort(ref allocated_info, "start");
@@ -326,6 +343,53 @@ namespace memory_allocation
             }
 
         }
+   
+        private static bool canCompact(int size)
+        {
+            int available = 0;
+            for (int i = 0; i < holes_info.Count; ++i)
+            {
+                available += holes_info[i].size;
+                if (size <= available) return true;
+            }
+            return false;
+        }
+     
+        private static bool handle_compaction(Entry p)
+        { //hint, I don't push any thing to the waiting list
+            bool canCompact = Program.canCompact(p.size);
+            if (!canCompact)
+            {
+                MessageBox.Show("no free space to allocate process " + p.id +
+                  "\nit will be allocated whenever it's possible :)", "Notice");
+                return false;
+            }
+            else
+            {
+                DialogResult userResp = MessageBox.Show("using compact can solve the problem,\n"
+                    + "Do you want to apply compact?"
+                    ,
+                    "No enough space",
+                    MessageBoxButtons.YesNo
+                    ,
+                    MessageBoxIcon.Question
+                    );
+                if (userResp.ToString() == "No")
+                {
+                    MessageBox.Show("p" + p.id + " pushed to a waiting queue" +
+                  "\nit will be allocated whenever it's possible :)", "OK");
+                    return false;
+                }
+                else //compact
+                {
+                    //use
+                    Compact();
+                    Allocate(p);
+                    return true;
+                }
+            }
+        }
+
         static void Main(string[] args)
         {
             //let form1 work
