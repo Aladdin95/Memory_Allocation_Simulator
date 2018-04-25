@@ -126,7 +126,8 @@ namespace memory_allocation
 
             else return;
 
-            for (int j = 0; j < input_processes.Count && holes_info.Count > 0; j++)
+            int j = 0;
+            while (j < input_processes.Count && holes_info.Count > 0)
             {
                 int i = 0;
                 int n = holes_info.Count;
@@ -154,6 +155,7 @@ namespace memory_allocation
                         break;
                     }
                 }
+                if (i == n) j++;
             }
             sort(ref allocated_info, "start");
         }
