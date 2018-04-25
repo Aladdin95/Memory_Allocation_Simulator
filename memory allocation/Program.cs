@@ -148,14 +148,17 @@ namespace memory_allocation
                         input_processes.RemoveAt(j);
                         break;
                     }
-                    else if (canCompact(input_processes[j].size))
+                }
+                if (i == n)
+                {
+                    if (canCompact(input_processes[j].size))
                     {
                         handle_compaction(input_processes[j]);
                         input_processes.RemoveAt(j);
-                        break;
                     }
+                    else
+                        j++;
                 }
-                if (i == n) j++;
             }
             sort(ref allocated_info, "start");
         }
