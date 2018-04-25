@@ -366,7 +366,7 @@ namespace memory_allocation
             }
             else
             {
-                DialogResult userResp = MessageBox.Show("using compact can solve the problem,\n"
+                DialogResult userResp = MessageBox.Show("using compact can allocate P"+p.id+",\n"
                     + "Do you want to apply compact?"
                     ,
                     "No enough space",
@@ -376,7 +376,7 @@ namespace memory_allocation
                     );
                 if (userResp.ToString() == "No")
                 {
-                    MessageBox.Show("p" + p.id + " pushed to a waiting queue" +
+                    MessageBox.Show("p" + p.id + " will be in the waiting queue" +
                   "\nit will be allocated whenever it's possible :)", "OK");
                     return false;
                 }
