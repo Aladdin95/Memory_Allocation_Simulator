@@ -151,11 +151,8 @@ namespace memory_allocation
                 }
                 if (i == n)
                 {
-                    if (canCompact(input_processes[j].size))
-                    {
-                        handle_compaction(input_processes[j]);
-                        input_processes.RemoveAt(j);
-                    }
+                    if(handle_compaction(input_processes[j]))
+                            input_processes.RemoveAt(j);
                     else
                         j++;
                 }
@@ -365,8 +362,8 @@ namespace memory_allocation
             bool canCompact = Program.canCompact(p.size);
             if (!canCompact)
             {
-                MessageBox.Show("no free space to allocate process " + p.id +
-                  "\nit will be allocated whenever it's possible :)", "Notice");
+                //MessageBox.Show("no free space to allocate process " + p.id +
+                //  "\nit will be allocated whenever it's possible :)", "Notice");
                 return false;
             }
             else
@@ -381,8 +378,8 @@ namespace memory_allocation
                     );
                 if (userResp.ToString() == "No")
                 {
-                    MessageBox.Show("p" + p.id + " will be in the waiting queue" +
-                  "\nit will be allocated whenever it's possible :)", "OK");
+                   // MessageBox.Show("p" + p.id + " will be in the waiting queue" +
+                  //"\nit will be allocated whenever it's possible :)", "OK");
                     return false;
                 }
                 else //compact
